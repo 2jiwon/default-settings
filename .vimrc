@@ -1,13 +1,14 @@
+"set paste                      " 그대로 붙여넣기
 set number                     " line 표시를 해줍니다.
 set ai                         " auto indent 
 set si                         " smart indent
 set cindent                    " c style indent
-set tabstop=8                  " tab을 8칸으로
-set softtabstop=2
+"set tabstop=8                  " tab을 8칸으로
+"set softtabstop=2
 set shiftwidth=2               " shift를 2칸으로 >, >>, <, << 등의 명령어
 set ignorecase                 " 검색시 대소문자 구별하지않음
 set hlsearch                   " 검색시 하이라이트 색상 강조
-set expandtab                  " tab 대신 띄어쓰기로
+"set expandtab                  " tab 대신 띄어쓰기로
 set background=dark            " 검정배경을 사용할 때, 이 색상에 맞춰 문법 하이라이트 색상이 달라집니다.
 set nocompatible               " 방향키로 이동가능
 set fileencodings=utf-8,euc-kr " 파일인코딩 형식 지정
@@ -20,12 +21,8 @@ set showmatch                  " 매칭되는 괄호를 보여줌
 set nowrap                     " 자동 줄바꿈 하지 않음
 set wmnu                       " tab 자동완성시 가능한 목록을 보여줌
 set autowrite                  " 다른 파일로 넘어갈 때 자동 저장
-set smarttab
-color darkblue
-colorscheme koehler 
+"set smarttab
 syntax on
-
-set tags+=$HOME/workspace/SYS_PG/GLIBC/glibc-2.23/tags,$HOME/workspace/SYS_PG/KN_SRC/linux-4.7.2/tags
 
 autocmd BufReadPre,BufNewFile * let b:did_ftplugin = 1
 
@@ -36,18 +33,3 @@ let Tlist_Ctags_Cmd = "/usr/bin/ctags"
 let Tlist_Inc_Winwidth = 0
 set complete+=k
 set dictionary+=$HOME/autoCompletion.txt
-
-" Cscope 사용
-
-set csprg=/usr/bin/cscope
-set csto=0
-set cst
-set nocsverb
-
-if filereadable("./cscope.out")
-cs add cscope.out
-else
-cs add $HOME/workspace/SYS_PG/GLIBC/glibc-2.23/cscope.out
-cs add /home/fancytank/workspace/SYS_PG/KN_SRC/linux-4.7.2/cscope.out
-endif
-set csverb

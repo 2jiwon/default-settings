@@ -37,13 +37,13 @@ fi
 
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
-    xterm-color|*-256color) color_prompt=yes;;
+    xterm-color) color_prompt=yes;;
 esac
 
 # uncomment for a colored prompt, if the terminal has the capability; turned
 # off by default to not distract the user: the focus in a terminal window
 # should be on the output of commands, not on the prompt
-#force_color_prompt=yes
+force_color_prompt=yes
 
 if [ -n "$force_color_prompt" ]; then
     if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
@@ -57,9 +57,10 @@ if [ -n "$force_color_prompt" ]; then
 fi
 
 if [ "$color_prompt" = yes ]; then
-  #  PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-  # mine
-     PS1="\[\e[01;32m\]\u\[\e[0;0m\]@\[\e[0;33m\]\h\[\e[0;0m\]\[\e[30;36m\] \W\[\e[0;0m\] $ "
+    # original
+    #PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+    # fancytank
+    PS1="\[\e[01;32m\]\u\[\e[0;0m\]@\[\e[0;33m\]\h\[\e[0;0m\]\[\e[30;36m\] \W\[\e[0;0m\] $ "
 else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
@@ -68,8 +69,7 @@ unset color_prompt force_color_prompt
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
 xterm*|rxvt*)
-#PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
-    PS1="\[\e[01;32m\]\u\[\e[0;0m\]@\[\e[0;33m\]\h\[\e[0;0m\]\[\e[30;36m\] \W\[\e[0;0m\] $ "
+    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
     ;;
 *)
     ;;
@@ -86,19 +86,16 @@ if [ -x /usr/bin/dircolors ]; then
     alias fgrep='fgrep --color=auto'
     alias egrep='egrep --color=auto'
 
-#mine
-    alias cdmypath='cd $HOME/workspace/SYS_PG/'
     alias tmux='TERM=xterm-256color tmux -2'
-
 fi
-
-# colored GCC warnings and errors
-#export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
 # some more ls aliases
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
+
+#fancytank's alias
+alias gW='gcc -Wall'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -122,18 +119,33 @@ if ! shopt -oq posix; then
   elif [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
   fi
+alias vi='vim'
 fi
 
-#이하부터는 '만화로 배우는 리눅스 시스템관리'책에서 참고하여 추가한 내용
+# show a random command everytime open terminal
+# echo "Did you know that:"; whatis $(ls /bin | shuf -n 1)
+
+######이하부터는 '만화로 배우는 리눅스 시스템관리'책에서 참고하여 추가한 내용
 
 # CTRL + S 를 사용
 stty stop undef
 
 # Share bash history
-function share_history {
-    history -a
-    history -c
-    history -r
-}
-PROMPT_COMMAND='share_history'
-shopt -u histappend
+#function share_history {
+#    history -a
+#    history -c
+#    history -r
+#}
+#PROMPT_COMMAND='share_history'
+#shopt -u histappend
+
+## 원래 PATH 정보 (2017.10.30)
+ORIGIN_PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin"
+
+PATH=$PATH:/home/jiwon/project/android-studio/bin
+
+# Raspi ssh
+pi_home_path="P2222 pi@218.155.247.248"
+pipath="pi@192.168.1.3:/home/pi/project/project_web/"
+pipath="$pi_home_path:/home/pi/project/project_web/"
+pipath="pi@218.155.247.248:/home/pi/project/project_web/"
