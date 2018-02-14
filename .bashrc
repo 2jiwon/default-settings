@@ -94,7 +94,7 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 
-#fancytank's alias
+# MY ALIAS
 alias gW='gcc -Wall'
 
 # Add an "alert" alias for long running commands.  Use like so:
@@ -131,21 +131,29 @@ fi
 stty stop undef
 
 # Share bash history
-#function share_history {
+# function share_history {
 #    history -a
 #    history -c
 #    history -r
-#}
+# }
 #PROMPT_COMMAND='share_history'
 #shopt -u histappend
 
 ## 원래 PATH 정보 (2017.10.30)
-ORIGIN_PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin"
+#ORIGIN_PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin"
 
-PATH=$PATH:/home/jiwon/project/android-studio/bin
+if [ -n "echo $TMUX_HOME" ]; then
+  export TMUX_HOME=/home/jiwon/tmux
+  export PATH=$PATH:${TMUX_HOME}
+fi
 
-# Raspi ssh
-pi_home_path="P2222 pi@218.155.247.248"
-pipath="pi@192.168.1.3:/home/pi/project/project_web/"
-pipath="$pi_home_path:/home/pi/project/project_web/"
-pipath="pi@218.155.247.248:/home/pi/project/project_web/"
+if [ -n "echo $EDITOR" ]; then
+  export EDITOR='vim'
+fi
+
+#if [ -n "echo $ANDROID_HOME" ]; then
+#  export ANDROID_HOME=$HOME/Android/Sdk
+#  export PATH=$PATH:$ANDROID_HOME/tools
+#  export PATH=$PATH:$ANDROID_HOME/platform-tools
+#  export PATH=$PATH:/opt/android-studio/bin
+#fi
