@@ -64,7 +64,7 @@ if [ "$color_prompt" = yes ]; then
 else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
-unset color_prompt force_color_prompt
+# unset color_prompt force_color_prompt
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
@@ -74,6 +74,16 @@ xterm*|rxvt*)
 *)
     ;;
 esac
+
+# xterm-256color setting
+if [ "$COLORTERM" == "gnome-terminal" ] || [ "$COLORTERM" == "xfce4-terminal" ]
+then
+  export TERM=xterm-256color
+elif [ -n "$COLORTERM" ]
+then
+  export TERM=xterm-256color
+fi
+
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
@@ -96,6 +106,7 @@ alias l='ls -CF'
 
 # MY ALIAS
 alias gW='gcc -Wall'
+alias vi='vim'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -125,8 +136,6 @@ fi
 # show a random command everytime open terminal
 # echo "Did you know that:"; whatis $(ls /bin | shuf -n 1)
 
-######이하부터는 '만화로 배우는 리눅스 시스템관리'책에서 참고하여 추가한 내용
-
 # CTRL + S 를 사용
 stty stop undef
 
@@ -151,9 +160,11 @@ if [ -n "echo $EDITOR" ]; then
   export EDITOR='vim'
 fi
 
+# Android Studio PATH
 #if [ -n "echo $ANDROID_HOME" ]; then
 #  export ANDROID_HOME=$HOME/Android/Sdk
 #  export PATH=$PATH:$ANDROID_HOME/tools
 #  export PATH=$PATH:$ANDROID_HOME/platform-tools
 #  export PATH=$PATH:/opt/android-studio/bin
 #fi
+
