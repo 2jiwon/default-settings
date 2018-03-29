@@ -12,6 +12,8 @@ Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'scrooloose/nerdtree'
 
+Plugin 'mattn/emmet-vim'
+
 Plugin 'pangloss/vim-javascript'
 
 Plugin 'crusoexia/vim-monokai'
@@ -80,3 +82,5 @@ set ignorecase					  " 검색시 대소문자 구별하지않음
 set hlsearch			 		  " 검색시 하이라이트 색상 강조
 
 set background=dark				  " 검정배경을 사용할 때, 이 색상에 맞춰 문법 하이라이트 색상이 달라집니다.
+
+set clipboard=unnamedplus
