@@ -13,7 +13,7 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'scrooloose/nerdtree'
 
 Plugin 'mattn/emmet-vim'
-
+" https://github.com/mattn/emmet-vim
 Plugin 'pangloss/vim-javascript'
 
 Plugin 'crusoexia/vim-monokai'
@@ -58,6 +58,7 @@ colorscheme monokai
 set fileencodings=utf-8,euc-kr    " 파일인코딩 형식 지정
 
 set nobackup                      " 백업파일을 만들지 않음
+set noswapfile                    " swap파일을 만들지 않음
 
 set title						  " 제목을 표시
 set number					      " line 표시를 해줍니다.
