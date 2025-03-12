@@ -1,5 +1,5 @@
-# tmux version: 2.4
-#
+# 2025.03 현재 사용 중
+# 
 # tmux.conf 적용하기
 # tmux source-file ~/.tmux.conf
 #
@@ -35,12 +35,13 @@ bind-key -T copy-mode-vi 'r' send -X rectangle-toggle
 #bind -Tcopy-mode-vi 'y' send -X copy-pipe-and-cancel "reattach-to-user-namespace pbcopy"
 
 # use xclip
-bind-key -T copy-mode-vi y send -X copy-pipe "xclip -sel clip -i"
+#bind-key -T copy-mode-vi y send -X copy-pipe "xclip -sel clip -i"
+bind-key -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "xclip -sel clip -i"
 
 ## Set the prefix to ^S.
-unbind C-b
-set -g prefix ^S
-bind s send-prefix
+#unbind C-b
+#set -g prefix ^S
+#bind s send-prefix
 
 # Bind appropriate commands similar to screen.
 # lockscreen ^X x 
@@ -53,7 +54,7 @@ bind x lock-server
 unbind ^C
 bind ^C new-window
 unbind c
-bind c new-window
+bind c new-window -c "#{pane_current_path}" 
 
 # detach ^D d
 unbind ^D
@@ -76,6 +77,7 @@ bind * list-clients
 # title A
 unbind A
 bind A command-prompt "rename-window %%"
+set-option -g allow-rename off
 
 ## other ^S
 #unbind ^S
@@ -116,9 +118,9 @@ bind l refresh-client
 # split -v | -h -
 unbind |
 unbind -
-bind | split-window -h
-bind \ split-window -h
-bind - split-window -v
+bind | split-window -h -c "#{pane_current_path}"
+bind \ split-window -h -c "#{pane_current_path}"
+bind - split-window -v -c "#{pane_current_path}"
 
 # :kB: focus up
 unbind Tab
@@ -136,7 +138,7 @@ set -g history-limit 100000
 #-------------------------------------------- Added by user
 #
 # Change the default $TERM to tmux-256color
-#set -g default-terminal "tmux-256color"
+set -g default-terminal "screen-256color"
 # Enable RGB colour if running in xterm(1)
 set-option -sa terminal-overrides ",xterm*:Tc"
 
@@ -146,13 +148,41 @@ bind y set synchronize-panes\; display 'synchronize-panes #{?synchronize-panes,o
 
 #------------------------------------
 # http://ourcstory.tistory.com/369
-
+#
 set-option -g visual-activity on
 set-window-option -g monitor-activity on
 
 bind r source-file ~/.tmux.conf \; display "Reloaded!"
 
-#https://unix.stackexchange.com/questions/320465/new-tmux-sessions-do-not-source-bashrc-file
-
+# https://unix.stackexchange.com/questions/320465/new-tmux-sessions-do-not-source-bashrc-file
+#
 set-option -g default-shell "/bin/bash"
+
+#------------------------------------
+# http://gypark.pe.kr/wiki/action=edit&id=Tmux 
+# Setting STATUS BAR
+# 
+# default status bar color
+set-option -g status-bg colour39 
+set-option -g status-fg black
+set-option -g status-attr default
+#
+# default window title color
+set-window-option -g window-status-bg white 
+set-window-option -g window-status-fg colour17
+set-window-option -g window-status-attr bold
+#
+# active window title color
+set-window-option -g window-status-current-bg colour17 
+set-window-option -g window-status-current-fg white
+set-window-option -g window-status-current-attr bold
+
+#--------------------------------------------
+# Tmux resurrect 
+# https://github.com/tmux-plugins/tmux-resurrect
+#
+set -g @plugin 'tmux-plugins/tpm'
+set -g @plugin 'tmux-plugins/tmux-resurrect'
+
+run '~/.tmux/plugins/tpm/tpm'
 
