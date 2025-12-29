@@ -154,9 +154,9 @@ set-window-option -g monitor-activity on
 
 bind r source-file ~/.tmux.conf \; display "Reloaded!"
 
-# https://unix.stackexchange.com/questions/320465/new-tmux-sessions-do-not-source-bashrc-file
+# set default shell
 #
-set-option -g default-shell "/bin/bash"
+set-option -g default-shell "/bin/zsh"
 
 #------------------------------------
 # http://gypark.pe.kr/wiki/action=edit&id=Tmux 
