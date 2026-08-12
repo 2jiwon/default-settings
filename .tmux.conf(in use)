@@ -1,4 +1,4 @@
-# 2025.03 현재 사용 중
+# 2026.08 마지막 수정
 # 
 # tmux.conf 적용하기
 # tmux source-file ~/.tmux.conf
@@ -35,13 +35,8 @@ bind-key -T copy-mode-vi 'r' send -X rectangle-toggle
 #bind -Tcopy-mode-vi 'y' send -X copy-pipe-and-cancel "reattach-to-user-namespace pbcopy"
 
 # use xclip
-#bind-key -T copy-mode-vi y send -X copy-pipe "xclip -sel clip -i"
 bind-key -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "xclip -sel clip -i"
 
-## Set the prefix to ^S.
-#unbind C-b
-#set -g prefix ^S
-#bind s send-prefix
 
 # Bind appropriate commands similar to screen.
 # lockscreen ^X x 
@@ -64,24 +59,10 @@ bind ^D detach
 unbind *
 bind * list-clients
 
-# next ^@ ^N sp n 
-#unbind ^@
-#bind ^@ next-window
-#unbind ^N
-#bind ^N next-window
-#unbind " "
-#bind " " next-window
-#unbind n
-#bind n next-window
-
 # title A
 unbind A
 bind A command-prompt "rename-window %%"
 set-option -g allow-rename off
-
-## other ^S
-#unbind ^S
-#bind ^S last-window
 
 # prev ^H ^P p ^? 
 unbind ^H
@@ -99,16 +80,6 @@ bind ^W list-windows
 unbind w
 bind w list-windows
 
-# quit \ 
-#unbind '\'
-#bind '\' confirm-before "kill-server"
-
-# kill K k 
-#unbind K
-#bind K confirm-before "kill-window"
-#unbind k
-#bind k confirm-before "kill-window"
-
 # redisplay ^L l 
 unbind ^L
 bind ^L refresh-client
@@ -119,7 +90,7 @@ bind l refresh-client
 unbind |
 unbind -
 bind | split-window -h -c "#{pane_current_path}"
-bind \ split-window -h -c "#{pane_current_path}"
+bind '\' split-window -h -c "#{pane_current_path}"
 bind - split-window -v -c "#{pane_current_path}"
 
 # :kB: focus up
@@ -159,30 +130,20 @@ bind r source-file ~/.tmux.conf \; display "Reloaded!"
 set-option -g default-shell "/bin/zsh"
 
 #------------------------------------
-# http://gypark.pe.kr/wiki/action=edit&id=Tmux 
 # Setting STATUS BAR
 # 
-# default status bar color
-set-option -g status-bg colour39 
-set-option -g status-fg black
-set-option -g status-attr default
-#
-# default window title color
-set-window-option -g window-status-bg white 
-set-window-option -g window-status-fg colour17
-set-window-option -g window-status-attr bold
-#
-# active window title color
-set-window-option -g window-status-current-bg colour17 
-set-window-option -g window-status-current-fg white
-set-window-option -g window-status-current-attr bold
+set-option -g status-style "bg=colour39,fg=black"
+
+set-window-option -g window-status-style "bg=white,fg=colour17,bold"
+
+set-window-option -g window-status-current-style "bg=colour17,fg=white,bold"
 
 #--------------------------------------------
-# Tmux resurrect 
+# Tmux resurrect - 설치하고 나서 활성화 시키기
 # https://github.com/tmux-plugins/tmux-resurrect
 #
-set -g @plugin 'tmux-plugins/tpm'
-set -g @plugin 'tmux-plugins/tmux-resurrect'
+# set -g @plugin 'tmux-plugins/tpm'
+# set -g @plugin 'tmux-plugins/tmux-resurrect'
 
-run '~/.tmux/plugins/tpm/tpm'
+# run '~/.tmux/plugins/tpm/tpm'
 
